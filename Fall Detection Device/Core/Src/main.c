@@ -19,6 +19,8 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 // Test comment ?
+// Where would this go
+// How does STM32CubeIDE work?
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
