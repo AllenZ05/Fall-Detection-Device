@@ -103,8 +103,10 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-//	  HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
-//	  HAL_Delay(1000);
+	  HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
+	  HAL_Delay(1000);
+
+
 	  mpu6050_read();
 	  HAL_Delay(1000);
     /* USER CODE END WHILE */
