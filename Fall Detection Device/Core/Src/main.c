@@ -62,6 +62,7 @@ static void MX_I2C1_Init(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
+int16_t counter_accel = 0;
 
 int Acceleration_Thresold(void)
 {
@@ -71,11 +72,22 @@ int Acceleration_Thresold(void)
 		{
 			  HAL_GPIO_TogglePin(LED_Green_Pin_GPIO_Port, LED_Green_Pin_Pin);
 			  HAL_Delay(500);
+
+			  counter_accel++;
+
+			  if (counter_accel >= 18)
+				{
+					while (1)
+					{
+						HAL_GPIO_TogglePin(LED_Blue_Pin_GPIO_Port, LED_Blue_Pin_Pin);
+					}
+				}
 		}
 	}
 	return 0;
 }
 
+int counter_emergency = 0;
 int Emergency_Button(void)
 {
 	  if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_13)== GPIO_PIN_RESET)
@@ -84,9 +96,25 @@ int Emergency_Button(void)
 		  {
 			  HAL_GPIO_TogglePin(LED_Yellow_Pin_GPIO_Port, LED_Yellow_Pin_Pin);
 			  HAL_Delay(500);
+
+			  counter_emergency++;
+
+			  if (counter_emergency >= 8)
+			  {
+				  while (1)
+				  {
+					  HAL_GPIO_TogglePin(LED_Blue_Pin_GPIO_Port, LED_Blue_Pin_Pin);
+				  }
+			  }
+
 		  }
 	  }
 		  return 0;
+}
+
+int Call_For_Help(void)
+{
+
 }
 /* USER CODE END 0 */
 
@@ -276,7 +304,7 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(LED_Green_Pin_GPIO_Port, LED_Green_Pin_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, LED_Yellow_Pin_Pin|LD2_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, LED_Yellow_Pin_Pin|LED_Blue_Pin_Pin|LD2_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin : B1_Pin */
   GPIO_InitStruct.Pin = B1_Pin;
@@ -291,8 +319,8 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(LED_Green_Pin_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : LED_Yellow_Pin_Pin LD2_Pin */
-  GPIO_InitStruct.Pin = LED_Yellow_Pin_Pin|LD2_Pin;
+  /*Configure GPIO pins : LED_Yellow_Pin_Pin LED_Blue_Pin_Pin LD2_Pin */
+  GPIO_InitStruct.Pin = LED_Yellow_Pin_Pin|LED_Blue_Pin_Pin|LD2_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
