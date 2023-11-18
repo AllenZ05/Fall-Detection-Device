@@ -112,10 +112,6 @@ int Emergency_Button(void)
 		  return 0;
 }
 
-int Call_For_Help(void)
-{
-
-}
 /* USER CODE END 0 */
 
 /**
