@@ -61,7 +61,21 @@ static void MX_I2C1_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+int Button_Pressed(void)
+{
 
+  if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_13)== GPIO_PIN_RESET)
+  {
+	  while(1)
+	  {
+		  HAL_GPIO_TogglePin(LED_Green_Pin_GPIO_Port, LED_Green_Pin_Pin);
+		  HAL_Delay(1000);
+		  HAL_GPIO_TogglePin(LED_Green_Pin_GPIO_Port, LED_Green_Pin_Pin);
+		  HAL_Delay(1000);
+	  }
+  }
+	  return 0;
+}
 /* USER CODE END 0 */
 
 /**
@@ -104,7 +118,7 @@ int main(void)
   while (1)
   {
 
-	  HAL_GPIO_TogglePin(LED_Green_Pin_GPIO_Port, LED_Green_Pin_Pin);
+	  Button_Pressed();
 
 
 
