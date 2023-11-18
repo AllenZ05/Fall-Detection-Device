@@ -76,6 +76,21 @@ int Button_Pressed(void)
   }
 	  return 0;
 }
+
+int Acceleration_Thresold(void)
+{
+	if (z_acc_g > 2 || z_acc_g < 0)
+	{
+		while (1)
+		{
+			  HAL_GPIO_TogglePin(LED_Green_Pin_GPIO_Port, LED_Green_Pin_Pin);
+			  HAL_Delay(1000);
+			  HAL_GPIO_TogglePin(LED_Green_Pin_GPIO_Port, LED_Green_Pin_Pin);
+			  HAL_Delay(1000);
+		}
+	}
+	return 0;
+}
 /* USER CODE END 0 */
 
 /**
@@ -119,7 +134,7 @@ int main(void)
   {
 
 	  Button_Pressed();
-
+	  Acceleration_Thresold();
 	  mpu6050_read();
 	  HAL_Delay(1000);
     /* USER CODE END WHILE */

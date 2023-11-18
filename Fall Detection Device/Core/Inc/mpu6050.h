@@ -21,4 +21,7 @@
 void mpu6050_init();
 void mpu6050_read();
 
+extern float z_acc_g;
+
+
 #endif /* INC_MPU6050_H_ */
