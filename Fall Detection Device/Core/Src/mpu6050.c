@@ -52,25 +52,27 @@ void mpu6050_init()
 
 void mpu6050_read()
 {
-//	uint8_t data[2];
-//	int16_t x_acc;
-//	HAL_I2C_Mem_Read(&hi2c1, (DEVICE_ADDRESS <<1) + 1, REG_DATA, 1, data, 2, 100);
-//    x_acc = ((int16_t)data[0] << 8) + data[1];
-//    printf("x axis acceleration: %d \n", x_acc);
-
 	uint8_t data[6];
-	int16_t x_acc;
-	int16_t y_acc;
-	int16_t z_acc;
+	int16_t x_acc_raw;
+	int16_t y_acc_raw;
+	int16_t z_acc_raw;
+	float x_acc_g;
+	float y_acc_g;
+	float z_acc_g;
+	const float SENSITIVITY = 8192.0;
 
 	HAL_I2C_Mem_Read(&hi2c1, (DEVICE_ADDRESS <<1) + 1, REG_DATA, 1, data, 6, 100);
 
-    x_acc = ((int16_t)data[0] << 8) | data[1];
-    y_acc = ((int16_t)data[2] << 8) | data[3];
-    z_acc = ((int16_t)data[4] << 8) | data[5];
+    x_acc_raw = ((int16_t)data[0] << 8) | data[1];
+    y_acc_raw = ((int16_t)data[2] << 8) | data[3];
+    z_acc_raw = ((int16_t)data[4] << 8) | data[5];
+
+    x_acc_g = (float)x_acc_raw / SENSITIVITY;
+    y_acc_g = (float)y_acc_raw / SENSITIVITY;
+    z_acc_g = (float)z_acc_raw / SENSITIVITY;
 
     printf("----------------------------------\n");
-    printf("X axis acceleration: %d \n", x_acc);
-    printf("Y axis acceleration: %d \n", y_acc);
-    printf("Z axis acceleration: %d \n", z_acc);
+    printf("X axis acceleration: %f \n", x_acc_g);
+    printf("Y axis acceleration: %f \n", y_acc_g);
+    printf("Z axis acceleration: %f \n", z_acc_g);
 }

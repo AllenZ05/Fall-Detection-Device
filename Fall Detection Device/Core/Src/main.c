@@ -120,8 +120,6 @@ int main(void)
 
 	  Button_Pressed();
 
-
-
 	  mpu6050_read();
 	  HAL_Delay(1000);
     /* USER CODE END WHILE */
