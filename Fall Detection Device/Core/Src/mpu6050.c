@@ -50,15 +50,17 @@ void mpu6050_init()
 	  }
 }
 
+float x_acc_g;
+float y_acc_g;
+float z_acc_g;
+
 void mpu6050_read()
 {
 	uint8_t data[6];
 	int16_t x_acc_raw;
 	int16_t y_acc_raw;
 	int16_t z_acc_raw;
-	float x_acc_g;
-	float y_acc_g;
-	float z_acc_g;
+
 	const float SENSITIVITY = 8192.0;
 
 	HAL_I2C_Mem_Read(&hi2c1, (DEVICE_ADDRESS <<1) + 1, REG_DATA, 1, data, 6, 100);
