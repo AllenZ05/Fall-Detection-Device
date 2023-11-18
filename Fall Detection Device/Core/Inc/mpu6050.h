@@ -21,6 +21,7 @@
 void mpu6050_init();
 void mpu6050_read();
 
+extern float x_acc_g;
 extern float y_acc_g;
 extern float z_acc_g;
 

@@ -69,9 +69,7 @@ int Button_Pressed(void)
 	  while(1)
 	  {
 		  HAL_GPIO_TogglePin(LED_Green_Pin_GPIO_Port, LED_Green_Pin_Pin);
-		  HAL_Delay(1000);
-		  HAL_GPIO_TogglePin(LED_Green_Pin_GPIO_Port, LED_Green_Pin_Pin);
-		  HAL_Delay(1000);
+		  HAL_Delay(500);
 	  }
   }
 	  return 0;
@@ -79,14 +77,12 @@ int Button_Pressed(void)
 
 int Acceleration_Thresold(void)
 {
-	if ((y_acc_g > -0.5 || y_acc_g < 0.5) && (z_acc_g > 2 || z_acc_g < 0))
+	if ((x_acc_g < -0.1 || x_acc_g > 0.1) && (y_acc_g < -0.1 || y_acc_g > 0.1) && (z_acc_g < 0.5 || z_acc_g > 1.5))
 	{
 		while (1)
 		{
 			  HAL_GPIO_TogglePin(LED_Green_Pin_GPIO_Port, LED_Green_Pin_Pin);
-			  HAL_Delay(1000);
-			  HAL_GPIO_TogglePin(LED_Green_Pin_GPIO_Port, LED_Green_Pin_Pin);
-			  HAL_Delay(1000);
+			  HAL_Delay(500);
 		}
 	}
 	return 0;
