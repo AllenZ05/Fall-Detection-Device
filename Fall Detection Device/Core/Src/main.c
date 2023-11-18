@@ -79,7 +79,7 @@ int Button_Pressed(void)
 
 int Acceleration_Thresold(void)
 {
-	if (z_acc_g > 2 || z_acc_g < 0)
+	if ((y_acc_g > -0.5 || y_acc_g < 0.5) && (z_acc_g > 2 || z_acc_g < 0))
 	{
 		while (1)
 		{
