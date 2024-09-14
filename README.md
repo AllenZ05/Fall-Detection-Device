@@ -26,7 +26,7 @@ A Fall Detection Device designed to assist the elderly by detecting falls and no
 - **Sensors:** MPU6050 accelerometer/gyroscope
 - **Communication:** GSM Module
   
-### Timeline 
+## Timeline 
 
 - **Sep - Oct 2023:** Planning and design phase
 - **Nov 2023:** Development and coding phase
